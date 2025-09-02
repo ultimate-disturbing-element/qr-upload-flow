@@ -1,0 +1,281 @@
+#app {
+    text-align: center;
+}
+
+.qr-upload-root {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #fff;
+}
+
+.qr-upload-layout {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.qr-upload__header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 16px 0 16px;
+}
+
+.qr-upload__logo {
+    height: 32px;
+}
+
+.qr-upload__title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.qr-upload__camera {
+    margin: 2rem 16px 0 16px;
+    height: 65%;
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 2px solid #eee;
+}
+
+
+.camera-preview {
+    aspect-ratio: 3/4;
+    height: 100%;
+    object-fit: fill;
+}
+
+.shutter-btn {
+    position: absolute;
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: white;
+    border: 4px solid #ccc;
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: transform 0.1s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.shutter-btn::after {
+    content: "";
+    width: 50px;
+    height: 50px;
+    background: white;
+    border-radius: 50%;
+    border: 2px solid #eee;
+    transition: background 0.2s ease-in-out;
+}
+
+.shutter-btn:active {
+    transform: translateX(-50%) scale(0.95);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.shutter-btn:active::after {
+    background: #f5f5f5;
+}
+
+.preview-overlay {
+    position: absolute;
+    bottom: 135px;
+    left: 0;
+    width: 100%;
+    padding: 0.2rem;
+    background-color: rgb(0, 0, 0, 0.5);
+}
+
+.preview-container {
+    display: flex;
+    gap: 0.5rem;
+    overflow-x: auto;
+    padding: 0.5rem;
+}
+
+.preview-item {
+    position: relative;
+    flex: 0 0 auto;
+    cursor: grab;
+    transition: transform 0.2s ease;
+}
+
+.preview-item.dragging {
+    opacity: 0.5;
+    transform: scale(0.9);
+}
+
+.preview-item.drag-over {
+    border: 2px dashed #4caf50;
+    border-radius: 0.5rem;
+}
+
+.preview-item img {
+    width: 80px;
+    height: 80px;
+    object-fit: fill;
+    border-radius: 0.5rem;
+}
+
+.remove-btn {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    background: red;
+    border: none;
+    color: white;
+    font-size: 0.9rem;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.upload-btn {
+    padding: 0.5rem 1rem;
+    background: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 1rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.no-img-placeholder {
+    color: white;
+    text-align: center;
+    width: 100%;
+}
+
+/* Item being dragged */
+.sortable-chosen {
+    opacity: 0.8;
+    transform: scale(1.05);
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+/* Ghost placeholder in list */
+.sortable-ghost {
+    opacity: 0.4;
+    border: 2px dashed #999;
+    background: #f0f0f0;
+    border-radius: 8px;
+}
+
+/* While dragging */
+.sortable-drag {
+    cursor: grabbing;
+    z-index: 9999;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+
+
+.single-preview {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    max-width: 400px;
+    /* Adjust as needed */
+}
+
+.single-preview img.camera-preview {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    object-fit: fill;
+}
+
+/* Close button (top-left) */
+.single-preview .close-btn {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    background: rgba(255, 0, 0, 0.8);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+/* Tick button (top-right) */
+.single-preview .tick-btn {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    background: rgba(0, 128, 0, 0.8);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+/* Button hover effect */
+.single-preview .close-btn:hover,
+.single-preview .tick-btn:hover {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.qr-upload__toast {
+    position: fixed;
+    bottom: 16px;
+    right: 16px;
+    padding: 12px 20px;
+    border-radius: 8px;
+    color: white;
+    font-size: 0.875rem;
+    animation: fadein 0.3s, fadeout 0.3s 2.7s;
+}
+
+.qr-upload__toast--success {
+    background: #28a745;
+}
+
+.qr-upload__toast--error {
+    background: #dc3545;
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeout {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
