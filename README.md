@@ -73,6 +73,37 @@ const config = {
 sdk.init(config)
 ```
 
+## 🔎 Overview of Core Modules
+
+### 📷 generateQRCode
+Generates a QR code that can be scanned by clients to **capture or upload images** using their device camera or gallery.  
+Useful for cross-device flows where one device scans and uploads, while another fetches the results.
+
+---
+
+### 📂 fetchApi
+Handles fetching already uploaded files from your backend.  
+- Configure the `url` and `responseKey` to match your API.  
+- Returns the list of files so you can display them in your app.  
+
+---
+
+### ⬆️ uploadApi
+Uploads images directly to your backend.  
+- Specify the `url` and `fileKey`.  
+- Supports optional headers, body data, and authentication.  
+- Triggers `onUploadImageSuccess` callback once files are uploaded successfully.  
+
+---
+
+### 🔄 polling
+Automatically checks your backend for **new uploaded files** at regular intervals.  
+- Controlled by `enablePolling` and `pollingInterval`.  
+- Comes with callbacks like `onPollingStart`, `onPollingStop`, `onPollingError`, and `onNewFiles`.  
+- Ideal for scenarios where new files may appear without refreshing the app.  
+
+
+
 
 ## 📖 SDK Documentation
 
